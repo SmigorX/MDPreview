@@ -1,9 +1,14 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from cmd import Cmd
 import os
 import markdown
 from fastapi.templating import Jinja2Templates
+from MdToHtmlConverter import *
 from fastapi.responses import HTMLResponse
+import re
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import HtmlFormatter
 
 app = FastAPI()
 cmd = Cmd()
@@ -49,12 +54,9 @@ def get_file(file_path):
 
 
 @app.get("/")
-async def web_render(file: str):
-    file = get_file(file)
-    print(directory)
+async def web_render(request: Request, file: str):
+    file_content = get_file(file)
+    file = code_box(file_content)
     file = markdown.markdown(file)
-
-    html_response = HTMLResponse(content=file)
-    html_response.headers["Cache-Control"] = "no-cache"
-
-    return html_response
+    file = parse_ordered_list(file)
+    return templates.TemplateResponse("markdown_template.html", {"request": request , "markdown_content": file})

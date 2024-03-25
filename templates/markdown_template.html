@@ -1,11 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
     <title>Markdown Preview</title>
-</head>
-<body>
-    <div>
-        {{ markdown_content | safe }}
-    </div>
-</body>
+    <style>
+        /* CSS styles for Markdown lists */
+        body {
+            background-color: #ffffff; /* Example background color */
+            color: #1f1f1f; /* Example text color */
+            font-size: 16px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        ul ul {
+            list-style-type: circle;
+            margin-left: 20px;
+        }
+        ol {
+            background: #194d4d;
+        }
+
+    </style>
+  </head>
+  <body>
+  <pre>{{ markdown_content | safe }}</pre>>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+  </body>
 </html>

@@ -9,7 +9,7 @@ import time
 
 cmd = Cmd()
 
-port = 7315
+port = 7316
 
 
 def terminal_render(file_path):
@@ -18,7 +18,8 @@ def terminal_render(file_path):
         os.system('cls' if os.name == 'nt' else 'clear')
         file = get_file(file_path)
         file = markdown.markdown(file)
-        print(html_to_ansi(file))
+        file = html_to_ansi(file)
+        print(file)
 
 
 def start_web_server():
